@@ -14,8 +14,8 @@ def load_data():
 
 data = load_data()
 
-st.title("📜 Cari Undangan Anda")
-st.write("Silakan ketik nama Anda untuk melihat undangan digital.")
+st.title("📜 Cari Undangan Ta")
+st.write("Silakan ketik nama Anda untuk melihat undangan ramah tamah ibb.")
 
 # Input nama
 query = st.text_input("Masukkan nama Anda:")
