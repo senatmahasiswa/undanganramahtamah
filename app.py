@@ -18,7 +18,7 @@ st.title("📜 UNDANGAN RAMAH TAMAH IBB")
 st.write("Masukkan ki nama Ta' untuk melihat undangan ramah tamah ibb Ta kakak'.")
 
 # Input nama
-query = st.text_input("Masukkan nama Anda:")
+query = st.text_input("Masukkan ki nama'ta Kakak:")
 
 if query:
     query = query.strip().upper()
