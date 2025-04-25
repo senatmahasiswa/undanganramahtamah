@@ -15,7 +15,7 @@ def load_data():
 data = load_data()
 
 st.title("📜 UNDANGAN RAMAH TAMAH IBB")
-st.write("Silakan ketik nama Ta' untuk melihat undangan ramah tamah ibb.")
+st.write("Masukkan ki nama Ta' untuk melihat undangan ramah tamah ibb Ta kakak'.")
 
 # Input nama
 query = st.text_input("Masukkan nama Anda:")
@@ -38,4 +38,4 @@ if query:
     else:
         st.warning("Nama tidak ditemukan. Coba cek kembali ejaan nama Anda.")
 else:
-    st.info("Masukkan nama Ta' untuk mencari undangan.")
+    st.info("Masukkan ki nama Ta' untuk mencari undangan Ta kaka.")
