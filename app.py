@@ -16,10 +16,10 @@ data = load_data()
 # Styling
 st.set_page_config(page_title="Undangan Ramah Tamah IBB", layout="centered")
 st.markdown("<h1 style='text-align: center; color: navy;'>📜 UNDANGAN RAMAH TAMAH IBB</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Masukkan nama Anda untuk melihat undangan ramah tamah IBB.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>MasukkanKi namaTa untuk melihat undangan ramah tamah IBB TA kakak.</p>", unsafe_allow_html=True)
 
 # Input nama
-query = st.text_input("Masukkan nama lengkap Anda:")
+query = st.text_input("Masukkan nama lengkapTA:")
 
 if query:
     query = query.strip().upper()
@@ -37,6 +37,6 @@ if query:
             qr.save(buf)
             st.image(Image.open(buf), caption="📎 Scan QR untuk akses undangan", use_container_width=True)
     else:
-        st.error("❌ Nama tidak ditemukan. Silakan cek kembali ejaan nama Anda.")
+        st.error("❌ Nama tidak ditemukan. Silakan cek kembali ejaan nama ta kakak.")
 else:
     st.info("📥 Silakan masukkan nama Anda di atas untuk mencari undangan.")
