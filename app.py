@@ -15,11 +15,11 @@ data = load_data()
 
 # Styling
 st.set_page_config(page_title="Undangan Ramah Tamah IBB", layout="centered")
-st.markdown("<h1 style='text-align: center; color: navy;'>🎓 UNDANGAN RAMAH TAMAH IBB</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: navy;'>📜 UNDANGAN RAMAH TAMAH IBB</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Masukkan nama Anda untuk melihat undangan ramah tamah IBB.</p>", unsafe_allow_html=True)
 
 # Load logo
-logo_path = "LOGO SEMA IBB.jpg"  # atau "LOGO SEMA IBB.png"
+logo_path = "LOGO IBB.jpg"  # atau "LOGO SEMA IBB.png"
 logo = Image.open(logo_path)
 
 # Input nama
