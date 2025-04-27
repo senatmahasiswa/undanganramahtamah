@@ -1,9 +1,8 @@
-
 import streamlit as st
 import pandas as pd
 import qrcode
-from io import BytesIO
 from PIL import Image
+from io import BytesIO
 
 # Load invitation data
 @st.cache_data
@@ -14,27 +13,50 @@ def load_data():
 
 data = load_data()
 
-st.title("📜 UNDANGAN RAMAH TAMAH IBB")
-st.write("Masukkan ki nama Ta' untuk melihat undangan ramah tamah ibb Ta kakak'.")
+# Styling
+st.set_page_config(page_title="Undangan Ramah Tamah IBB", layout="centered")
+st.markdown("<h1 style='text-align: center; color: navy;'>📜 UNDANGAN RAMAH TAMAH IBB</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Masukkan nama Anda untuk melihat undangan ramah tamah IBB.</p>", unsafe_allow_html=True)
+
+# Load logo
+logo_path = "LOGO IBB.jpg"  # atau "LOGO SEMA IBB.png"
+logo = Image.open(logo_path)
 
 # Input nama
-query = st.text_input("Masukkan ki nama'ta Kakak:")
+query = st.text_input("Masukkan nama lengkap Anda:")
 
 if query:
     query = query.strip().upper()
-    results = data[data['Nama Penerima'].str.contains(query)]
+    with st.spinner('Mencari undangan...'):
+        results = data[data['Nama Penerima'].str.contains(query)]
 
     if not results.empty:
         for idx, row in results.iterrows():
-            st.subheader(row['Nama Penerima'])
-            st.write("🔗 [Link Undangan](%s)" % row['Link'])
+            st.success(f"🎉 Ditemukan: {row['Nama Penerima']}")
+            st.markdown(f"<p style='text-align: center; font-size:20px;'>🔗 <a href='{row['Link']}' target='_blank'>Klik untuk membuka undangan</a></p>", unsafe_allow_html=True)
 
-            # Generate QR code from the link
-            qr = qrcode.make(row['Link'])
+            # Generate QR code
+            qr = qrcode.QRCode(
+                error_correction=qrcode.constants.ERROR_CORRECT_H  # high correction untuk bisa tempel logo
+            )
+            qr.add_data(row['Link'])
+            qr.make(fit=True)
+
+            qr_img = qr.make_image(fill_color="black", back_color="white").convert('RGB')
+
+            # Resize logo
+            logo_size = 60
+            logo = logo.resize((logo_size, logo_size))
+
+            # Paste logo ke tengah QR
+            pos = ((qr_img.size[0] - logo_size) // 2, (qr_img.size[1] - logo_size) // 2)
+            qr_img.paste(logo, pos)
+
+            # Show QR code
             buf = BytesIO()
-            qr.save(buf)
-            st.image(Image.open(buf), caption="QR Undangan", use_column_width=False)
+            qr_img.save(buf, format="PNG")
+            st.image(Image.open(buf), caption="📎 Scan QR untuk akses undangan", use_container_width=True)
     else:
-        st.warning("Nama tidak ditemukan. Cobaki cek kembali ejaan namata kakak.")
+        st.error("❌ Nama tidak ditemukan. Silakan cek kembali ejaan nama Anda.")
 else:
-    st.info("Masukkan ki nama Ta' untuk mencari undangan Ta kaka.")
+    st.info("📥 Silakan masukkan nama Anda di atas untuk mencari undangan.")
