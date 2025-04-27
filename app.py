@@ -28,7 +28,6 @@ if query:
         for idx, row in results.iterrows():
             st.subheader(row['Nama Penerima'])
             st.write("🔗 [Link Undangan](%s)" % row['Link'])
-            st.write(row['Teks Sebar'])
 
             # Generate QR code from the link
             qr = qrcode.make(row['Link'])
@@ -36,6 +35,6 @@ if query:
             qr.save(buf)
             st.image(Image.open(buf), caption="QR Undangan", use_column_width=False)
     else:
-        st.warning("Nama tidak ditemukan. Coba cek kembali ejaan nama Anda.")
+        st.warning("Nama tidak ditemukan. Cobaki cek kembali ejaan namata kakak.")
 else:
     st.info("Masukkan ki nama Ta' untuk mencari undangan Ta kaka.")
